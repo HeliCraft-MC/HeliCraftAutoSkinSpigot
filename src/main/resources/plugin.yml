@@ -1,0 +1,30 @@
+name: HeliCraftAutoSkin
+version: '${version}'
+main: org.ktilis.helicraftautoskin.HeliCraftAutoSkin
+api-version: 1.19
+author: Ktilis
+depend:
+  - DisguiseAPI
+loadbefore:
+  - CMI
+  - SkinsRestorer
+commands:
+  hcas:
+    usage: /hcas reload
+    permission: hcas.reload
+  skin:
+    usage: /skin
+    aliases: [ hcskin ]
+permissions:
+  hcas.reload:
+    default: op
+  hcas.addSkin:
+    default: op
+  hcas.setSkin:
+    default: op
+  hcas.*:
+    default: op
+    children:
+      - hcas.addSkin
+      - hcas.setSkin
+      - hcas.reload

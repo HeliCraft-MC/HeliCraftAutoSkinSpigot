@@ -1,0 +1,16 @@
+enabled: false
+skins-url: "https://example.com/<nick>.png" # "<nick>" for sure
+mineskin-apikey: "" # mineskin.org api key
+noPermissionsMessage: "Чтобы установить скин, перейдите на helicraft.ru."
+
+updateServer:
+  enabled: false
+  port: 3000
+  # Endpoint localhost:<port>/update?player=<nickname>
+
+# command "/hcas" to reload config
+
+# Permissions:
+# - hcas.reload - reload config
+# - hcas.setSkin - command "/skin set <название скина в бд> [player(optional)]"
+# - hcas.addSkin - command "/skin add <название скина в бд> <url скина>"
