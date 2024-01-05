@@ -1,6 +1,6 @@
 package org.ktilis.helicraftautoskin.skins.listeners;
 
-import net.pinger.disguise.Skin;
+import net.pinger.disguise.skin.Skin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

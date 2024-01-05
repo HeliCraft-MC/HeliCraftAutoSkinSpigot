@@ -4,11 +4,10 @@ package org.ktilis.helicraftautoskin.skins;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.pinger.disguise.DisguiseAPI;
-import net.pinger.disguise.Skin;
 import net.pinger.disguise.packet.PacketProvider;
+import net.pinger.disguise.skin.Skin;
 import org.bukkit.entity.Player;
 import org.ktilis.helicraftautoskin.HeliCraftAutoSkin;
-import org.ktilis.helicraftautoskin.skins.Database;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;

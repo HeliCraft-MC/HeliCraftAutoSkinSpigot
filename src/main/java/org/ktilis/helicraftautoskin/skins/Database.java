@@ -1,6 +1,6 @@
 package org.ktilis.helicraftautoskin.skins;
 
-import net.pinger.disguise.Skin;
+import net.pinger.disguise.skin.Skin;
 import org.ktilis.helicraftautoskin.HeliCraftAutoSkin;
 
 import java.io.File;
