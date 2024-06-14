@@ -22,9 +22,12 @@ permissions:
     default: op
   hcas.setSkin:
     default: op
+  hcas.reloadSkin:
+    default: op
   hcas.*:
     default: op
     children:
       - hcas.addSkin
       - hcas.setSkin
       - hcas.reload
+      - hcas.reloadSkin

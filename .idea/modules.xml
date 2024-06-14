@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/HeliCraftAutoSkin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/HeliCraftAutoSkin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IdeaProjects.HeliCraftAutoSkin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/IdeaProjects.HeliCraftAutoSkin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ktilis.IdeaProjects.HeliCraftAutoSkin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ktilis.IdeaProjects.HeliCraftAutoSkin.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.ktilis.HeliCraftAutoSkin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.ktilis.HeliCraftAutoSkin.main.iml" />
     </modules>
   </component>

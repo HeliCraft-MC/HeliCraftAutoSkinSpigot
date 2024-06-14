@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.ktilis.helicraftautoskin.HeliCraftAutoSkin;
 import org.ktilis.helicraftautoskin.skins.Database;
@@ -20,9 +21,10 @@ public class SkinCMD implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(args.length == 0) {
             if(
-                    !sender.hasPermission("hcas.reload") ||
-                            !sender.hasPermission("hcas.addSkin") ||
-                            !sender.hasPermission("hcas.setSkin")
+                    !sender.hasPermission("hcas.reload")
+                            && !sender.hasPermission("hcas.addSkin")
+                            && !sender.hasPermission("hcas.setSkin")
+                            && !sender.hasPermission("hcas.reloadSkin")
             ) {
                 sender.sendMessage(ChatColor.RED+ HeliCraftAutoSkin.getInstance().getConfig().getString("noPermissionsMessage"));
                 return true;
@@ -51,6 +53,13 @@ public class SkinCMD implements CommandExecutor {
                         ChatColor.YELLOW+"/"+label+" set <название скина в базе данных> [игрок(необязательно)] \n    "
                         + ChatColor.DARK_GRAY + "- "
                         + ChatColor.WHITE + "Устанавливает временный скин Вам или игроку. Действует до перезахода."
+                );
+            }
+            if(sender.hasPermission("hcas.reloadSkin")) {
+                sender.sendMessage(
+                        ChatColor.YELLOW+"/"+label+" reload \n    "
+                                + ChatColor.DARK_GRAY + "- "
+                                + ChatColor.WHITE + "Перезагрузить скин, который вы установили на сайте."
                 );
             }
             return true;
@@ -103,6 +112,16 @@ public class SkinCMD implements CommandExecutor {
             SkinsManager.setSkin(target, skin);
             sender.sendMessage(ChatColor.GREEN+"Временный скин установлен.");
             return true;
+        } else if (args[0].equalsIgnoreCase("reload")) {
+            if(!sender.hasPermission("hcas.reloadSkin")) return true;
+            if(sender instanceof ConsoleCommandSender) {
+                sender.sendMessage(
+                        ChatColor.RED + "Ошибка: данная команда доступна только игрокам!"
+                );
+                return true;
+            }
+            SkinsManager.updateSkin((Player) sender);
+            sender.sendMessage(ChatColor.GREEN+"Скин успешно обновлён!");
         }
         return true;
     }
