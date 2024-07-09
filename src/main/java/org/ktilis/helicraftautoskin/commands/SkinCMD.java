@@ -2,23 +2,24 @@ package org.ktilis.helicraftautoskin.commands;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.pinger.disguise.skin.Skin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.ktilis.helicraftautoskin.HeliCraftAutoSkin;
 import org.ktilis.helicraftautoskin.skins.Database;
-import org.ktilis.helicraftautoskin.skins.SkinsManager;
+import org.ktilis.helicraftautoskin.skins.Skin;
+import org.ktilis.helicraftautoskin.skins.SkinProvider;
 
 import java.io.IOException;
 import java.net.URL;
 
 public class SkinCMD implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if(args.length == 0) {
             if(
                     !sender.hasPermission("hcas.reload")
@@ -78,8 +79,8 @@ public class SkinCMD implements CommandExecutor {
                     sender.sendMessage("В базе данных уже есть скин с таким именем!");
                     return true;
                 }
-                Skin skin = SkinsManager.getSkin(skinUrl, skinName);
-                if(!Database.addSkin(skin, SkinsManager.tryGetFileSize(new URL(skinUrl)), skinName)) {
+                Skin skin = SkinProvider.getSkin(skinUrl, skinName);
+                if(!Database.addSkin(skin, SkinProvider.tryGetFileSize(new URL(skinUrl)), skinName)) {
                     sender.sendMessage(ChatColor.GREEN+"Скин успешно добавлен в базу данных!");
                 } else {
                     sender.sendMessage(ChatColor.RED+"Ошибка добавления скина #2.");
@@ -109,7 +110,7 @@ public class SkinCMD implements CommandExecutor {
                 return true;
             }
             Skin skin = Database.getSkin(skinName);
-            SkinsManager.setSkin(target, skin);
+            SkinProvider.setSkin(target, skin);
             sender.sendMessage(ChatColor.GREEN+"Временный скин установлен.");
             return true;
         } else if (args[0].equalsIgnoreCase("reload")) {
@@ -120,7 +121,7 @@ public class SkinCMD implements CommandExecutor {
                 );
                 return true;
             }
-            SkinsManager.updateSkin((Player) sender);
+            SkinProvider.updateSkin((Player) sender);
             sender.sendMessage(ChatColor.GREEN+"Скин успешно обновлён!");
         }
         return true;

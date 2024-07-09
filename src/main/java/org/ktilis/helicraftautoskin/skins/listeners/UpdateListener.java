@@ -6,19 +6,20 @@ import com.sun.net.httpserver.HttpServer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.ktilis.helicraftautoskin.HeliCraftAutoSkin;
-import org.ktilis.helicraftautoskin.skins.SkinsManager;
+import org.ktilis.helicraftautoskin.skins.SkinProvider;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 
 public class UpdateListener {
     private static HttpServer server;
 
-    public static void init(Integer port) {
+    public void init(Integer port) {
         try {
             server = HttpServer.create();
         } catch (IOException e) {
@@ -30,9 +31,13 @@ public class UpdateListener {
             server.bind(new InetSocketAddress(port), 0);
         } catch (IOException e) {
             HeliCraftAutoSkin.getInstance().getLogger().log(Level.SEVERE, "Failed to bind "+port+" port!");
-            e.printStackTrace();
+            e.fillInStackTrace();
         }
         server.start();
+    }
+
+    public void stop() {
+        server.stop(0);
     }
 
     static class ReqHandler implements HttpHandler {
@@ -57,11 +62,12 @@ public class UpdateListener {
 
             if (player != null) {
                 Bukkit.getServer().getScheduler().runTask(HeliCraftAutoSkin.getInstance(), () -> {
-                    SkinsManager.updateSkin(player);
+                    SkinProvider.updateSkin(player);
                 });
             } else {
-                String skinURL = HeliCraftAutoSkin.getInstance().getConfig().getString("skins-url").replaceAll("<nick>", playerName);
-                SkinsManager.getSkin(skinURL, playerName); // Меняет скин в бд
+                String skinURL = Objects.requireNonNull(HeliCraftAutoSkin.getInstance().getConfig().getString("skins-url"))
+                        .replaceAll("<nick>", playerName);
+                SkinProvider.getSkin(skinURL, playerName); // Меняет скин в бд
             }
 
 

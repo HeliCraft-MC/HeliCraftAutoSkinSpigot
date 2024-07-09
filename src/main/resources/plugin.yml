@@ -3,8 +3,6 @@ version: '${version}'
 main: org.ktilis.helicraftautoskin.HeliCraftAutoSkin
 api-version: 1.19
 author: Ktilis
-depend:
-  - DisguiseAPI
 loadbefore:
   - CMI
   - SkinsRestorer

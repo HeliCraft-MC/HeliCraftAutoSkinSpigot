@@ -1,6 +1,5 @@
 package org.ktilis.helicraftautoskin.skins;
 
-import net.pinger.disguise.skin.Skin;
 import org.ktilis.helicraftautoskin.HeliCraftAutoSkin;
 
 import java.io.File;
@@ -53,7 +52,7 @@ public class Database {
     }
     public static Skin getSkin(Long skin_size) {
         try {
-            if(!isSkinExists(skin_size)) return SkinsManager.defaultSkin;
+            if(!isSkinExists(skin_size)) return SkinProvider.defaultSkin;
             resSet = statmt.executeQuery("SELECT * FROM skins WHERE skin_length='"+skin_size+"';");
             resSet.next();
             String value = resSet.getString("skin_value");
@@ -65,7 +64,7 @@ public class Database {
     }
     public static Skin getSkin(String skinName) {
         try {
-            if(!isSkinExists(skinName)) return SkinsManager.defaultSkin;
+            if(!isSkinExists(skinName)) return SkinProvider.defaultSkin;
             resSet = statmt.executeQuery("SELECT * FROM skins WHERE skin_name='"+skinName+"';");
             resSet.next();
             String value = resSet.getString("skin_value");
